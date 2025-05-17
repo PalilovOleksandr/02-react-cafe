@@ -25,17 +25,17 @@ export default function App() {
       bad: 0
     });
   }
-  const sumVotes = votes.good + votes.neutral + votes.bad;
-  const procentVotes = sumVotes
-    ? Math.round((votes.good / sumVotes) * 100)
+  const totalVotes = votes.good + votes.neutral + votes.bad;
+  const positiveRate = totalVotes
+    ? Math.round((votes.good / totalVotes) * 100)
     : 0
   return (
     <>
       <div className={css.app}>
         <CafeInfo />
-        <VoteOptions onVote={handleVote} onReset={() => resetVotes()} canReset={sumVotes > 0 && true} />
-        {sumVotes > 0 ?
-          <VoteStats votes={{ good: votes.good, neutral: votes.neutral, bad: votes.bad }} totalVotes={sumVotes} positiveRate={procentVotes} />
+        <VoteOptions onVote={handleVote} onReset={resetVotes} canReset={totalVotes > 0} />
+        {totalVotes > 0 ?
+          <VoteStats votes={{ good: votes.good, neutral: votes.neutral, bad: votes.bad }} totalVotes={totalVotes} positiveRate={positiveRate} />
           : < Notification />}
       </div>
     </>
