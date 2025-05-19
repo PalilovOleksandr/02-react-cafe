@@ -13,10 +13,10 @@ export default function App() {
     bad: 0
   });
   const handleVote = (type: VoteType) => {
-    setVotes({
-      ...votes,
-      [type]: votes[type] + 1,
-    });
+    setVotes((prevVotes) => ({
+      ...prevVotes,
+      [type]: prevVotes[type] + 1,
+    }));
   };
   const resetVotes = () => {
     setVotes({
@@ -35,7 +35,7 @@ export default function App() {
         <CafeInfo />
         <VoteOptions onVote={handleVote} onReset={resetVotes} canReset={totalVotes > 0} />
         {totalVotes > 0 ?
-          <VoteStats votes={{ good: votes.good, neutral: votes.neutral, bad: votes.bad }} totalVotes={totalVotes} positiveRate={positiveRate} />
+          <VoteStats votes={votes} totalVotes={totalVotes} positiveRate={positiveRate} />
           : < Notification />}
       </div>
     </>
